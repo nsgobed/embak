@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-aboutuspage{% endblock %}
+
+<!-- replace everything below with: -->
+{% block content %}
+
+{% include 'header.html' %}
+<div class=" text-center container">
+    <div class="align-items-center pb-5">
+        <h3 class="py-5 mt-4">Mission and Vision</h3>
+        <p class="text-center m-auto"> {{ page.mission|richtext }} </p>
+
+    </div>
+    <div class="align-items-center pb-5" style="background-color: rgb(254, 208, 11);">
+        <h3 class="py-5 mt-4">History and Background</h3>
+        <p class="text-center m-auto"> {{ page.history|richtext }} </p>
+
+    </div>
+    <div class="align-items-center pb-5">
+        <h3 class="py-5 mt-4">Our Team</h3>
+        <p class="text-center m-auto"> {{ page.our_team|richtext }} </p>
+
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for item in page.staff_details.all %}
+        {% if item.image %}
+        <!-- <p>{{ item.title}}</p>
+        <h5>{{ item.name}}</h5> -->
+        {% image item.image fill-150x150 as img %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ img.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5>{{ item.name}}</h5>
+                    <p class="card-text">{{ item.title}}</p>
+                    <p class="card-text text-left">{{ item.bios|richtext}}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    
+    </div>
+    </div>
+</div>
+
+<!-- {% for item in page.staff_details.all %}
+<div class="row row-cols-1 row-cols-md-2 g-4 container m-auto">
+    <div class="col">
+        <div class="card float-right">
+            {% if item.image %}
+            {% image item.image fill-150x150 as img %}
+            <img src="{{ img.url}}" class="card-img-top" alt="..." >
+            {% else %}
+            <img src="{% static 'images/passport_placeholder.jpg' %}" class="card-img-top" alt="...">
+            {% endif %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name}}</h5>
+                <p class="card-text">{{ item.title}}</p>
+                <p class="card-text">{{ item.bios|richtext}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %} -->
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}

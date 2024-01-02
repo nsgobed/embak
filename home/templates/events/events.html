@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-eventspage{% endblock %}
+
+<!-- replace everything below with: -->
+{% block content %}
+
+{% include 'header.html' %}
+<div class=" text-center container">
+    <div class="align-items-center pb-5">
+        <h3 class="py-5 mt-4">Upcoming Events</h3>
+        <p class="text-center m-auto"> {{ page.upcoming_events|richtext }} </p>
+
+    </div>
+    <div class="align-items-center pb-2" style="background-color: rgb(254, 208, 11);">
+        <h3 class="py-2 mt-4">Community Success Stories</h3>
+        <p class="text-center m-auto"> {{ page.past_events_intro|richtext }} </p>
+
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4 m-2">
+        {% for item in page.past_events_gallery.all %}
+        {% if item.image %}
+        <!-- <p>{{ item.title}}</p>
+            <h5>{{ item.name}}</h5> -->
+        {% image item.image fill-150x150 as img %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ img.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3><s>{{ item.name}}</s></h3>
+                    <p class="card-text">{{ item.title}}</p>
+                    <p class="card-text text-left">{{ item.description|richtext}}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+</div>
+
+<!-- {% for item in page.staff_details.all %}
+<div class="row row-cols-1 row-cols-md-2 g-4 container m-auto">
+    <div class="col">
+        <div class="card float-right">
+            {% if item.image %}
+            {% image item.image fill-150x150 as img %}
+            <img src="{{ img.url}}" class="card-img-top" alt="..." >
+            {% else %}
+            <img src="{% static 'images/passport_placeholder.jpg' %}" class="card-img-top" alt="...">
+            {% endif %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name}}</h5>
+                <p class="card-text">{{ item.title}}</p>
+                <p class="card-text">{{ item.bios|richtext}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %} -->
+
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock %}
