@@ -27,7 +27,7 @@
          </div>
          <div class="carousel-inner">
             {% for item in page.carousel_snippets.all %}
-            {% image item.carousel.image fill-1140x500 as img %}
+            {% image item.carousel.image fill-1140x300 as img %}
             {% if forloop.first %}
             <div class="carousel-item active">
                <img src="{{ img.url }}" class="d-block w-100" alt="{{ item.carousel.caption }}">
@@ -58,23 +58,48 @@
       </div>
 </div>
 
-<div class="image.png text-center container pb-5">
-   <div class="align-items-center container">
-      <h3 class="py-5 mt-4">Welcome Message</h3>
-      <p class="text-center m-auto"> {{ page.intro|richtext }} </p>
+<div class="container py-5">
+
       
-   </div>
-   <div class="align-items-center container pb-5" style="background-color: rgb(254, 208, 11);">
+   <!-- <div class="align-items-center container pb-5" style="background-color: rgb(254, 208, 11);">
       <h3 class="py-5 mt-4">Brief Overview</h3>
       <p class="text-center m-auto" > {{ page.overview|richtext }} </p>
 
-   </div>
-   <div class="align-items-center">
-      <h3 class="py-5 mt-4">Highlight of Current Initiatives</h3>
-      <p class="text-center m-auto"> {{ page.current_initiatives_text|richtext }} </p>
+   </div> -->
 
+   <div class="d-flex flex-row pt-2 mb-5">
+      <div class="py-2">
+         <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Welcome Message</h5>
+      </div>
+      <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt="" 
+            style="width: 75vw; height:20px;"></div>
    </div>
-   <div class="row row-cols-1 row-cols-md-3 g-4">
+   <div style="height: 12rem;"><p class="text-center mx-auto my-5"> {{ page.intro|richtext }} </p></div>
+   
+
+   <div class="d-flex flex-row py-3 mt-5">
+      <div class="py-2">
+         <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Brief Overview</h5>
+      </div>
+      <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+            style="width: 75vw; height:20px;"></div>
+   </div>
+   
+   <div style="height: 12rem;"><p class="text-center mx-auto my-5"> {{ page.overview|richtext }} </p></div>
+
+
+   <div class="d-flex flex-row py-3 mt-5">
+      <div class="py-2">
+         <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Highlight of Current Initiatives</h5>
+      </div>
+      <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+            style="width: 75vw; height:20px;"></div>
+   </div>
+   
+   <p class="text-center mx-auto my-2"> {{ page.current_initiatives_text|richtext }} </p>
+
+   
+   <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
       {% for item in page.current_initiatives.all %}
       {% image item.image fill-500x500 as img %}
       <div class="col">

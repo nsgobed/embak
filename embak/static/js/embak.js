@@ -1,6 +1,8 @@
 const myCarouselElement = document.querySelector("#myCarousel");
 
 const carousel = new bootstrap.Carousel(myCarouselElement, {
-  interval: 500,
+  interval: 2000,
   touch: false,
 });
+
+$(".collapse").collapse();

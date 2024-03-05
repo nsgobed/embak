@@ -1,46 +1,49 @@
 {% load static wagtailcore_tags %}
-<nav class="navbar navbar-expand-lg" style="background-color: rgb(243, 242, 247);">
+<!-- <nav class="navbar navbar-expand-lg" style="background-color: rgb(243, 242, 247);"> -->
+
+<nav class="navbar navbar-expand-lg" style="background-color: rgb(255, 255, 255); box-shadow: 1px 1px 12px 2px #80808011; left: 0; padding: 16px 4px; position: fixed; right: 0; top: 0; z-index: 10000;">
     <div class="container">
-        <a class="navbar-brand" href="/"><img src="{% static 'images/favicon-32x32.png' %}" alt=""></a>
+        <!-- <a class="navbar-brand" href="/"><img src="{% static 'images/favicon-32x32.png' %}" alt=""></a> -->
+        <a class="navbar-brand" href="/"><img src="{% static 'images/logo.jpg' %}" alt="" style="height: 4rem;" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="/about-us/">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/education/">Education</a>
+                    <a class="nav-link ms-3" href="/education/">Education</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/talents-and-empowerment/">Talents and Empowerment</a>
+                    <a class="nav-link ms-3" href="/talents-and-empowerment/">Talents and Empowerment</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/community-impact/">Community Impact</a>
+                    <a class="nav-link ms-3" href="/community-impact/">Community Impact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/get-involved/">Get Involved</a>
+                    <a class="nav-link ms-3" href="/get-involved/">Get Involved</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/events/">Events</a>
+                    <a class="nav-link ms-3" href="/events/">Events</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle ms-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Blogs/News
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="/blogs-and-news/">Blogs</a></li>
+                        <li><a class="dropdown-item" href="#">community stories</a></li>
+                        <li><a class="dropdown-item" href="#">News and Articles</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link ms-3" href="#">Contact Us</a>
                 </li>
                 
             </ul>

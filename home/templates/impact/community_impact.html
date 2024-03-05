@@ -9,7 +9,7 @@
 {% block content %}
 
 {% include 'header.html' %}
-<div class=" text-center container">
+<div class="text-center container">
     <div class="align-items-center pb-5">
         <h3 class="py-5 mt-4">Testimonials</h3>
         <p class="text-center m-auto"> {{ page.testimonials|richtext }} </p>
@@ -20,12 +20,32 @@
         <p class="text-center m-auto"> {{ page.statistics_and_achievements|richtext }} </p>
 
     </div>
-    <div class="align-items-center pb-5">
-        <h3 class="py-5 mt-4">Community Feedback</h3>
-        <p class="text-center m-auto"> {{ page.community_feedback|richtext }} </p>
-
+    <div class="align-items-center pb-2">
+        <h3 class="py-2 mt-4">Community Feedback</h3>
+        <p class="text-start"> {{ page.community_feedback|richtext }} </p>
     </div>
-</div>
+    </div>
+    <div class="container">
+        {% for item in feedbacks %}
+        {% if item.approved %}
+        <div class=" mt-1 p-0" style="background-color: rgb(243, 242, 247);">
+            <p class="text-left">{{item.name}} {{item.date}} {{item.time}}</p>
+            <p style="text-indent: 2rem;">{{item.message}}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% if alert %}
+        <div>{{ alert }}</div>
+        {% endif %}
+        <button class="btn btn-info w-20" data-bs-toggle="collapse" data-bs-target="#demo"
+            style="background-color: rgb(254, 208, 11);">Add feedback</button>
+        <div id="demo" class="collapse mt-2">
+            <form class="text-center border border-primary p-2 border-shadow" action="." method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn w-20" style="background-color: rgb(254, 208, 11);" />
+            </form>
+        </div>
 </div>
 
 <!-- {% for item in page.staff_details.all %}

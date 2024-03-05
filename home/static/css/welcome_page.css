@@ -15,7 +15,8 @@ body {
     padding: 0 15px;
     color: #231f20;
     font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
-    line-height: 1.25;
+    /* line-height: 1.25; */
+    font-size: 2rem;
 }
 
 a {

@@ -14,6 +14,18 @@ from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalKey
 
 
+class CommunityFeedback(models.Model):
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
 # class EducationalInitiatives(Orderable):
 
 #     page = ParentalKey("education.EducationPage",
