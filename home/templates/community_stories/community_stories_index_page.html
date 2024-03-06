@@ -3,7 +3,7 @@
 <!-- load wagtailcore_tags by adding this: -->
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block body_class %}template-blogindexpage{% endblock %}
+{% block body_class %}template-communitystoriesindexpage{% endblock %}
 
 <!-- replace everything below with: -->
 {% block content %}
@@ -14,31 +14,22 @@
         <nav class="navbar">
             <ul class="navbar-nav d-flex flex-row">
                 <li class="nav-item mr-2">
-                    <a class="but nav-link px-2" style="margin-right: 1.5rem; background-color: rgb(255, 250, 5); color: black;" href="/blogs-and-news/">Blogs</a>
+                    <a class="but nav-link px-2"
+                        style="margin-right: 1.5rem;  color: black;"
+                        href="/blogs-and-news/">Blogs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 1.5rem; color: black;"  href="/community-stories/">Community Stories</a>
+                    <a class="nav-link" style="margin-right: 1.5rem; background-color: rgb(255, 250, 5); color: black;" href="/community-stories/">Community Stories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/news-and/articles/">News and Articles</a>
+                    <a class="nav-link" style="color: black;" href="/news-and-articles/">News and Articles</a>
                 </li>
             </ul>
         </nav>
-        
+
     </h5>
 
     <div class="d-flex flex-row pt-2 mb-5">
-        <div class="py-2">
-            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Introduction</h5>
-        </div>
-        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 64.7vw; height:20px;"></div>
-    </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.intro|richtext }} </p>
-    </div>
-
-    <!-- <div class="d-flex flex-row pt-2 mb-5">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Community Success Stories</h5>
         </div>
@@ -46,19 +37,9 @@
                 style="width: 64.7vw; height:20px;"></div>
     </div>
     <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.intro|richtext }} </p>
+        <p class="text-center mx-auto my-5"> {{ page.community_stories|richtext }} </p>
     </div>
 
-    <div class="d-flex flex-row pt-2 mb-5">
-        <div class="py-2">
-            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">How to Get Involved</h5>
-        </div>
-        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 64.7vw; height:20px;"></div>
-    </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.news_and_articlescommunity_stories|richtext }} </p>
-    </div> -->
     
     <!-- <div class="align-items-center pb-3" style="background-color: rgb(254, 208, 11);">
         <h3 class="text-center py-3 mt-4">Community Success Stories</h3>

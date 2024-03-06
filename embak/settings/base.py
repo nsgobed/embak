@@ -24,6 +24,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "community_stories",
+    "news_and_articles",
     "blog",
     "events",
     "get_involved",

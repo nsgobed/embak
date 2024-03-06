@@ -95,26 +95,25 @@ from modelcluster.fields import ParentalKey
 #     ]
 
 
-class BlogIndexPage(Page):
-    template = "blog/blog_index_page.html"
+class NewsAndArticlesIndexPage(Page):
+    template = "news_and_articles/news_and_articles_index_page.html"
 
     max_count = 1
 
-    intro = RichTextField(blank=True)
     # community_stories = RichTextField(blank=True)
-    # news_and_articles = RichTextField(blank=True)
+    news_and_articles = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro'),
+        # FieldPanel('updates_on_initiatives'),
         # InlinePanel("educational_initiatives",
         #             label="Educational Initiatives"),
         # FieldPanel('community_stories'),
-        # FieldPanel('news_and_articles'),
+        FieldPanel('news_and_articles'),
         # InlinePanel("past_events_gallery", label="Past Events Gallery"),
         # FieldPanel('get_involved'),
         # InlinePanel("success_stories", label="Success Stories"),
     ]
 
     class Meta:
-        verbose_name = "Blog Page"
-        verbose_name_plural = "Blog Pages"
+        verbose_name = "News and Articles Page"
+        verbose_name_plural = "News and Articles Pages"

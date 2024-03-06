@@ -9,11 +9,21 @@
 {% block content %}
 
 {% include 'header.html' %}
-<div class="text-center container">
-    <div class="align-items-center pb-5">
-        <h3 class="py-5 mt-4">Overview of Educational Initiatives</h3>
-        <p class="text-center m-auto"> {{ page.overview|richtext }} </p>
+<div class="container pt-2">
+    <h3 class="text-center mb-3" style="position: relative; top: 30px; padding-top: 6rem; padding-bottom: 1rem;">Education</h3>
+
+    <div class="d-flex flex-row pt-2 mb-5">
+        <div class="py-2">
+            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Overview of Educational Initiatives</h5>
+        </div>
+        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+                style="width: 64.7vw; height:20px;"></div>
     </div>
+    <div style="height: 12rem;">
+        <p class="text-center mx-auto my-5"> {{ page.overview|richtext }} </p>
+    </div>
+
+
     <div class="d-flex flex-row">
         {% for item in page.educational_initiatives.all %}
         {% if item.image %}
@@ -25,14 +35,19 @@
         {% endif %}
         {% endfor %}
     </div>
-</div>
 
-
-<div class=" text-center container">
-    <div class="align-items-center pb-5" style="background-color: rgb(254, 208, 11);">
-        <h3 class="py-5 mt-4">Enrolled Students</h3>
-        <p class="text-center m-auto"> {{ page.enrolled_students_intro|richtext }} </p>
+    <div class="d-flex flex-row pt-2 mb-5">
+        <div class="py-2">
+            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Enrolled Students
+            </h5>
+        </div>
+        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+                style="width: 74vw; height:20px;"></div>
     </div>
+    <div style="height: 12rem;">
+        <p class="text-center mx-auto my-5"> {{ page.enrolled_students_intro|richtext }} </p>
+    </div>
+
     <div class="d-flex flex-row">
         {% for item in page.enrolled_students.all %}
         {% if item.image %}
@@ -44,14 +59,21 @@
         {% endif %}
         {% endfor %}
     </div>
-</div>
 
 
-<div class=" text-center container">
-    <div class="align-items-center pb-5">
-        <h3 class="py-5 mt-4">Success Stories</h3>
-        <p class="text-center m-auto"> {{ page.success_stories_intro|richtext }} </p>
+    <div class="d-flex flex-row pt-2 mb-5">
+        <div class="py-2">
+            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Success Stories
+            </h5>
+        </div>
+        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+                style="width: 74vw; height:20px;"></div>
     </div>
+    <div style="height: 12rem;">
+        <p class="text-center mx-auto my-5"> {{ page.success_stories_intro|richtext }} </p>
+    </div>
+
+   
     <div class="d-flex flex-row">
         {% for item in page.success_stories.all %}
         {% if item.image %}
