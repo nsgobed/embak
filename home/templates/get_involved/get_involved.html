@@ -12,33 +12,167 @@
 <div class="container pt-2">
     <h3 class="text-center mb-3" style="position: relative; top: 30px; padding-top: 6rem; padding-bottom: 1rem;">Get Involved </h3>
 
-    <div class="d-flex flex-row pt-2 mb-5">
+    <div class="d-flex flex-row pt-2 mb-3">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Volunteer Opportunities</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
                 style="width: 70.8vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.volunteer_opportunitie|richtext }} </p>
+    <div class="text-center" style="height: 3rem;">
+        <h5 class="my-2"> {{ page.volunteer_opportunities_intro|richtext }} </h5>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 ">
+        {% for item in page.volunteer_opportunities.all %}
+        {% if item.image %}
+        <!-- <p>{{ item.title}}</p>
+            <h5>{{ item.name}}</h5> -->
+        {% image item.image fill-150x150 as img %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ img.url}}" class="card-img-top p-2" alt="..." >
+                <div class="card-body">
+                    <h5 class="text-center">{{ item.title}}</h5> 
+                    {% if total_volunteers %}
+                        {% for v_item in total_volunteers %}
+                            {% if v_item.opportunity_name == item.title %}
+                            <h5 class="text-center card-text" style="color: red;">Volunteers: {{ v_item.total_count |safe }}</h5>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <h5 class="text-center card-text" style="color: red;">Volunteers: 0</h5>                   
+                    {% endif %}
+                    <!-- <p class="card-text text-left">{{ item.bios|richtext}}</p> -->
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    
     </div>
 
 
+    <div class="container text-center my-4">  
+        {% if alert %}
+        <div>{{ alert }}</div>
+        {% endif %}
+      
+        <button class="btn btn-info w-20" data-bs-toggle="collapse" data-bs-target="#demo"
+            style="background-color: rgb(254, 208, 11);">Volunteer Application</button>
+        <div id="demo" class="collapse mt-2">
+            <form class="text-center border border-primary w-fit-content py-2 border-shadow bg-light" action="." method="POST">
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="name" id="name" required>
+                    <label class="ms-5" for="email">Email:</label>
+                    <input type="text" name="email" id="email" required>
+                    <label class="ms-5" for="phone_number">Phone number:</label>
+                    <input type="text" name="phone_number" id="phone_number" required>
+                </div>
+                <div class="py-3">
+                    
+                    <label for="email">Opportunity Name:</label>
+                    <select name="opportunity_name" id="opportunity_name" required>
+                        <option value="">Select Opportunity</option>
+                        {% for item in page.volunteer_opportunities.all %}
+                        <option value="{{item.title}}">{{item.title}}</option>
+                        {% endfor %}
+                    </select>
+                    <label class="ms-5" for="message">Message:</label>
+                    <textarea cols="35" name="message" id="message"></textarea>
+                </div>
+
+                <input type="submit" name="form" class="btn" style="background-color: rgb(254, 208, 11); width: 40%;" />
+            </form>
+        </div>
+    </div>
+
     <!-- <div class="align-items-center pb-5">
         <h3 class="py-5 mt-4">Volunteer Opportunities</h3>
-        <p class="text-center m-auto"> {{ page.volunteer_opportunities|richtext }} </p>
+        <p class="text-center m-auto"> {{ page.volunteer_opportunities_intro|richtext }} </p>
 
     </div> -->
 
-    <div class="d-flex flex-row pt-2 mb-5">
+    <div class="d-flex flex-row pt-2 mb-3">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Donation</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
                 style="width: 70.8vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.donate|richtext }} </p>
+    <div class="text-center" style="height: 3rem;">
+        <h5 class="my-2"> {{ page.donate|richtext }} </h5>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 ">
+        {% for item in page.donation_types.all %}
+        {% if item.image %}
+        <!-- <p>{{ item.title}}</p>
+                <h5>{{ item.name}}</h5> -->
+        {% image item.image fill-250x190 as img %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ img.url}}" class="card-img-top p-2" alt="...">
+                <div class="card-body">
+                    <h5 class="text-center">{{ item.type}}</h5>
+                    <!-- {% if total_volunteers %}
+                    {% for v_item in total_volunteers %}
+                    {% if v_item.opportunity_name == item.title %}
+                    <h5 class="text-center card-text" style="color: red;">Volunteers: {{ v_item.total_count |safe }}</h5>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <h5 class="text-center card-text" style="color: red;">Volunteers: 0</h5>
+                    {% endif %} -->
+                    <!-- <p class="card-text text-left">{{ item.bios|richtext}}</p> -->
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    
+    </div>
+
+
+    <div class="container text-center my-4">
+        {% if alert %}
+        <div>{{ alert }}</div>
+        {% endif %}
+    
+        <button class="btn btn-info w-20" data-bs-toggle="collapse" data-bs-target="#donor_form" id="donorToggleButton"
+            style="background-color: rgb(254, 208, 11);">Donate Now</button>
+        <div id="donor_form" class="collapse mt-2">
+            <form class="border border-primary py-2 border-shadow bg-light w-50 m-auto" action="."
+                method="POST">
+                {% csrf_token %}
+                {{ donor_form.as_custom_html | safe }}
+                <!-- <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="name" id="name" required>
+                    <label class="ms-5" for="email">Email:</label>
+                    <input type="text" name="email" id="email" required>
+                    <label class="ms-5" for="phone_number">Phone number:</label>
+                    <input type="text" name="phone_number" id="phone_number" required>
+                </div>
+                <div class="py-3">
+    
+                    <label for="email">Opportunity Name:</label>
+                    <select name="opportunity_name" id="opportunity_name" required>
+                        <option value="">Select Opportunity</option>
+                        {% for item in page.volunteer_opportunities.all %}
+                        <option value="{{item.title}}">{{item.title}}</option>
+                        {% endfor %}
+                    </select>
+                    <label class="ms-5" for="message">Message:</label>
+                    <textarea cols="35" name="message" id="message"></textarea>
+                </div> -->
+    
+                <input name="donor_form" type="submit" class="btn" style="background-color: rgb(254, 208, 11); width: 40%;" />
+            </form>
+        </div>
     </div>
 
     <!-- <div class="align-items-center pb-5" style="background-color: rgb(254, 208, 11);">
@@ -46,15 +180,15 @@
         <p class="text-center m-auto"> {{ page.donate|richtext }} </p>
     </div> -->
 
-    <div class="d-flex flex-row pt-2 mb-5">
+    <div class="d-flex flex-row pt-2 mb-3">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">How to Get Involved</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
                 style="width: 70.8vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.join_our_programs|richtext }} </p>
+    <div class="text-center" style="height: 3rem;">
+        <h5 class="my-2"> {{ page.join_our_programs|richtext }} </h5>
     </div>
 
     
@@ -94,4 +228,25 @@
 
 {% block footer %}
 {% include 'footer.html' %}
+{% endblock %}
+
+{% block extra_js %}
+
+<script>
+    // Get references to the button and the collapsible element
+    var toggleButton = document.getElementById('donorToggleButton');
+    var myElement = document.getElementById('donor_form');
+
+    // Add a click event listener to the button
+    toggleButton.addEventListener('click', function () {
+        // Check if the collapsible element is currently hidden
+        if (myElement.classList.contains('show')) {
+            // If it's currently shown, hide it
+            myElement.classList.remove('show');
+        } else {
+            // If it's currently hidden, show it
+            myElement.classList.add('show');
+        }
+    });
+</script>
 {% endblock %}

@@ -26,57 +26,57 @@ class CommunityFeedback(models.Model):
         return self.name
 
 
-# class EducationalInitiatives(Orderable):
+class StatisticsAndAchievements(Orderable):
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="educational_initiatives")
-#     title = models.CharField(max_length=255)
-#     description = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
+    page = ParentalKey("impact.CommunityImpactPage",
+                       related_name="statistics_and_achievements")
+    title = models.CharField(max_length=255)
+    description = RichTextField(blank=False)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('title'),
-#                 FieldPanel('image'),
-#                 FieldPanel('description'),
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                FieldPanel('image'),
+                FieldPanel('description'),
 
-#             ],
-#             heading='+'
-#         ),
-#     ]
+            ],
+            heading='+'
+        ),
+    ]
 
 
-# class EnrolledStudents(Orderable):
+class Testimonials(Orderable):
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="enrolled_students")
-#     institution = models.CharField(max_length=255)
-#     caption = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
+    page = ParentalKey("impact.CommunityImpactPage",
+                       related_name="testimonials")
+    author_name = models.CharField(max_length=255)
+    testimonial = RichTextField(blank=False)
+    # image = models.ForeignKey(
+    #     'wagtailimages.Image',
+    #     blank=True,
+    #     null=True,
+    #     on_delete=models.SET_NULL,
+    #     related_name='+'
+    # )
 
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('institution'),
-#                 FieldPanel('image'),
-#                 FieldPanel('caption'),
-#             ],
-#             heading='+'
-#         ),
-#     ]
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('author_name'),
+                # FieldPanel('image'),
+                FieldPanel('testimonial'),
+            ],
+            heading='+'
+        ),
+    ]
 
 
 # class SuccessStories(Orderable):
@@ -112,18 +112,19 @@ class CommunityImpactPage(Page):
 
     max_count = 1
 
-    testimonials = RichTextField(blank=True)
-    statistics_and_achievements = RichTextField(blank=True)
+    testimonials_intro = RichTextField(blank=True)
+    statistics_and_achievements_intro = RichTextField(blank=True)
     community_feedback = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('testimonials'),
-        # InlinePanel("educational_initiatives",
-        #             label="Educational Initiatives"),
-        FieldPanel('statistics_and_achievements'),
-        # InlinePanel("enrolled_students", label="Enrolled Students"),
+        # InlinePanel("statistics_and_achievements",
+        #             label="Statistics and Achievements"),
+        FieldPanel('statistics_and_achievements_intro'),
+        InlinePanel("statistics_and_achievements",
+                    label="Statistics and Achievements"),
+        FieldPanel('testimonials_intro'),
+        InlinePanel("testimonials", label="Testimonials"),
         FieldPanel('community_feedback'),
-        # InlinePanel("success_stories", label="Success Stories"),
     ]
 
     class Meta:

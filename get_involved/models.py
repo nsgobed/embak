@@ -14,57 +14,87 @@ from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalKey
 
 
-# class EducationalInitiatives(Orderable):
+class VolunteerData(models.Model):
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.IntegerField()
+    message = models.TextField()
+    opportunity_name = models.CharField(max_length=100)
+    approved = models.BooleanField(default=False)
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="educational_initiatives")
-#     title = models.CharField(max_length=255)
-#     description = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
-
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('title'),
-#                 FieldPanel('image'),
-#                 FieldPanel('description'),
-
-#             ],
-#             heading='+'
-#         ),
-#     ]
+    def __str__(self):
+        return self.name
 
 
-# class EnrolledStudents(Orderable):
+class VolunteerOpportunities(Orderable):
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="enrolled_students")
-#     institution = models.CharField(max_length=255)
-#     caption = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
+    page = ParentalKey("get_involved.GetInvolvedPage",
+                       related_name="volunteer_opportunities")
+    title = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('institution'),
-#                 FieldPanel('image'),
-#                 FieldPanel('caption'),
-#             ],
-#             heading='+'
-#         ),
-#     ]
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                FieldPanel('image'),
+            ],
+            heading='+'
+        ),
+    ]
+
+
+class DonationData(models.Model):
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
+    title = models.CharField(max_length=10)
+    first_name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    suffix = models.CharField(max_length=5)
+    street = models.CharField(max_length=100)
+    city = models.CharField(max_length=50)
+    postal_code = models.CharField(max_length=100)
+    country = models.CharField(max_length=50)
+    phone_number = models.IntegerField()
+    email = models.EmailField()
+    motive = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+
+class DonationTypes(Orderable):
+
+    page = ParentalKey("get_involved.GetInvolvedPage",
+                       related_name="donation_types")
+    type = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('type'),
+                FieldPanel('image'),
+            ],
+            heading='+'
+        ),
+    ]
 
 
 # class SuccessStories(Orderable):
@@ -100,16 +130,16 @@ class GetInvolvedPage(Page):
 
     max_count = 1
 
-    volunteer_opportunities = RichTextField(blank=True)
+    volunteer_opportunities_intro = RichTextField(blank=True)
     donate= RichTextField(blank=True)
     join_our_programs = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('volunteer_opportunities'),
-        # InlinePanel("educational_initiatives",
-        #             label="Educational Initiatives"),
+        FieldPanel('volunteer_opportunities_intro'),
+        InlinePanel("volunteer_opportunities",
+                    label="Volunteer Opportunities"),
         FieldPanel('donate'),
-        # InlinePanel("enrolled_students", label="Enrolled Students"),
+        InlinePanel("donation_types", label="Donation Types"),
         FieldPanel('join_our_programs'),
         # InlinePanel("success_stories", label="Success Stories"),
     ]

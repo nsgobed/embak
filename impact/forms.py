@@ -21,4 +21,4 @@ from .models import CommunityFeedback
 class CommunityFeedbackForm(forms.ModelForm):
     class Meta:
         model = CommunityFeedback
-        exclude = []
+        exclude = ['approved']

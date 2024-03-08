@@ -14,6 +14,9 @@ from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalKey
 
 
+from wagtail.search import index
+
+
 # class PastEventsGallery(Orderable):
 
 #     page = ParentalKey("events.EventsPage",
@@ -104,6 +107,13 @@ class BlogIndexPage(Page):
     # community_stories = RichTextField(blank=True)
     # news_and_articles = RichTextField(blank=True)
 
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        blogpages = self.get_children().live().order_by('-first_published_at')
+        context['blogpages'] = blogpages
+        return context
+
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
         # InlinePanel("educational_initiatives",
@@ -118,3 +128,21 @@ class BlogIndexPage(Page):
     class Meta:
         verbose_name = "Blog Page"
         verbose_name_plural = "Blog Pages"
+
+
+class BlogPage(Page):
+    template = "blog/blog_page.html"
+    date = models.DateField("Post date")
+    intro = models.CharField(max_length=250)
+    body = RichTextField(blank=True)
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        FieldPanel('intro'),
+        FieldPanel('body'),
+    ]

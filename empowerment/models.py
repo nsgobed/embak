@@ -14,57 +14,57 @@ from wagtail.snippets.models import register_snippet
 from modelcluster.fields import ParentalKey
 
 
-# class EducationalInitiatives(Orderable):
+class ProgramsAndActivities(Orderable):
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="educational_initiatives")
-#     title = models.CharField(max_length=255)
-#     description = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
+    page = ParentalKey("empowerment.EmpowermentPage",
+                       related_name="programs_and_activities")
+    title = models.CharField(max_length=255)
+    description = RichTextField(blank=False)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('title'),
-#                 FieldPanel('image'),
-#                 FieldPanel('description'),
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                FieldPanel('image'),
+                FieldPanel('description'),
 
-#             ],
-#             heading='+'
-#         ),
-#     ]
+            ],
+            heading='+'
+        ),
+    ]
 
 
-# class EnrolledStudents(Orderable):
+class CommunitySuccessStories(Orderable):
 
-#     page = ParentalKey("education.EducationPage",
-#                        related_name="enrolled_students")
-#     institution = models.CharField(max_length=255)
-#     caption = RichTextField(blank=False)
-#     image = models.ForeignKey(
-#         'wagtailimages.Image',
-#         blank=True,
-#         null=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+'
-#     )
+    page = ParentalKey("empowerment.EmpowermentPage",
+                       related_name="community_success_stories")
+    title = models.CharField(max_length=255)
+    description = RichTextField(blank=False)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
-#     panels = [
-#         MultiFieldPanel(
-#             [
-#                 FieldPanel('institution'),
-#                 FieldPanel('image'),
-#                 FieldPanel('caption'),
-#             ],
-#             heading='+'
-#         ),
-#     ]
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                FieldPanel('description'),
+                FieldPanel('image'),
+            ],
+            heading='+'
+        ),
+    ]
 
 
 # class SuccessStories(Orderable):
@@ -100,16 +100,17 @@ class EmpowermentPage(Page):
 
     max_count = 1
 
-    programs_and_activities = RichTextField(blank=True)
+    programs_and_activities_intro = RichTextField(blank=True)
     community_success_stories_intro = RichTextField(blank=True)
     get_involved = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('programs_and_activities'),
-        # InlinePanel("educational_initiatives",
-        #             label="Educational Initiatives"),
+        FieldPanel('programs_and_activities_intro'),
+        InlinePanel("programs_and_activities",
+                    label="Programs Activities"),
         FieldPanel('community_success_stories_intro'),
-        # InlinePanel("enrolled_students", label="Enrolled Students"),
+        InlinePanel("community_success_stories",
+                    label="Community Success Stories"),
         FieldPanel('get_involved'),
         # InlinePanel("success_stories", label="Success Stories"),
     ]

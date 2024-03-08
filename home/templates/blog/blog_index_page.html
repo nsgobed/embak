@@ -9,34 +9,39 @@
 {% block content %}
 
 {% include 'header.html' %}
+
+<div class="text-center mb-3" style="position: relative; top: 30px; padding-top: 4.9rem; padding-bottom: 1rem;">
+    <nav class="navbar bg-light">
+        <ul class="navbar-nav d-flex flex-row container justify-content-start">
+            <li class="nav-item mr-2">
+                <a class="nav-link px-2" style="margin-right: 1.5rem; background-color: rgb(255, 250, 5); color: black;" href="/blogs-and-news/">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2" style="margin-right: 1.5rem; color: black;"  href="/community-stories/">Community Stories</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link px-2" style="color: black;" href="/news-and-articles/">News and Articles</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 <div class="container pt-2">
-    <h5 class="text-center mb-3" style="position: relative; top: 30px; padding-top: 6rem; padding-bottom: 1rem;">
-        <nav class="navbar">
-            <ul class="navbar-nav d-flex flex-row">
-                <li class="nav-item mr-2">
-                    <a class="but nav-link px-2" style="margin-right: 1.5rem; background-color: rgb(255, 250, 5); color: black;" href="/blogs-and-news/">Blogs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="margin-right: 1.5rem; color: black;"  href="/community-stories/">Community Stories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: black;" href="/news-and/articles/">News and Articles</a>
-                </li>
-            </ul>
-        </nav>
-        
-    </h5>
 
     <div class="d-flex flex-row pt-2 mb-5">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Introduction</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 64.7vw; height:20px;"></div>
+                style="width: 77vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
+    <div style="height: 6rem;">
         <p class="text-center mx-auto my-5"> {{ page.intro|richtext }} </p>
     </div>
+    
+    {% for post in blogpages %}
+    <h5><a href="{% pageurl post %}" style="text-decoration: none;">{{ post.title }}</a></h5>
+    {{ post.specific.intro|richtext }} {{ post.specific.date }}
+    {% endfor %}
 
     <!-- <div class="d-flex flex-row pt-2 mb-5">
         <div class="py-2">
@@ -71,7 +76,7 @@
 
     </div> -->
 </div>
-</div>
+
 
 <!-- {% for item in page.staff_details.all %}
 <div class="row row-cols-1 row-cols-md-2 g-4 container m-auto">

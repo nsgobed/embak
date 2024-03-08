@@ -13,6 +13,8 @@ from wagtail.snippets.models import register_snippet
 
 from modelcluster.fields import ParentalKey
 
+from wagtail.search import index
+
 
 # class PastEventsGallery(Orderable):
 
@@ -102,6 +104,13 @@ class CommunityStoriesIndexPage(Page):
 
     community_stories = RichTextField(blank=True)
 
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        communitystoriespages = self.get_children().live().order_by('-first_published_at')
+        context['communitystoriespages'] = communitystoriespages
+        return context
+
     content_panels = Page.content_panels + [
         # FieldPanel('updates_on_initiatives'),
         # InlinePanel("educational_initiatives",
@@ -116,3 +125,21 @@ class CommunityStoriesIndexPage(Page):
     class Meta:
         verbose_name = "Community Stories Page"
         verbose_name_plural = "Community Stories Pages"
+
+
+class CommunityStoriesPage(Page):
+    template = "community_stories/community_story_page.html"
+    date = models.DateField("Post date")
+    intro = models.CharField(max_length=250)
+    body = RichTextField(blank=True)
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        FieldPanel('intro'),
+        FieldPanel('body'),
+    ]

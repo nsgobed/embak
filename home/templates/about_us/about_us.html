@@ -20,7 +20,7 @@
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
                 style="width: 73.2vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
+    <div style="height: 8rem;">
         <p class="text-center mx-auto my-5"> {{ page.mission|richtext }} </p>
     </div>
 
@@ -31,7 +31,7 @@
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
                 style="width: 70.5vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
+    <div style="height: 8rem;">
         <p class="text-center mx-auto my-5"> {{ page.history|richtext }} </p>
     </div>
 
@@ -47,7 +47,7 @@
     </div>
     
   
-    <div class="row row-cols-1 row-cols-md-3 ">
+    <div class="row row-cols-1 row-cols-md-4 ">
         {% for item in page.staff_details.all %}
         {% if item.image %}
         <!-- <p>{{ item.title}}</p>
@@ -55,10 +55,10 @@
         {% image item.image fill-150x150 as img %}
         <div class="col">
             <div class="card">
-                <img src="{{ img.url}}" class="card-img-top" alt="...">
+                <img src="{{ img.url}}" class="card-img-top" alt="..." style="border-radius: 50%;">
                 <div class="card-body">
-                    <h5>{{ item.name}}</h5>
-                    <p class="card-text">{{ item.title}}</p>
+                    <h5 class="text-center">{{ item.name}}</h5>
+                    <p class="text-center fst-italic card-text">{{ item.title}}</p>
                     <p class="card-text text-left">{{ item.bios|richtext}}</p>
                 </div>
             </div>
@@ -66,7 +66,6 @@
         {% endif %}
         {% endfor %}
     
-    </div>
     </div>
 </div>
 

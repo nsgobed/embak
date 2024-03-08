@@ -11,45 +11,46 @@
 {% include 'header.html' %}
 <div class="container pt-2">
     <h3 class="text-center mb-3" style="position: relative; top: 30px; padding-top: 6rem; padding-bottom: 1rem;">Community Impact</h3>
-
-    <div class="d-flex flex-row pt-2 mb-5">
-        <div class="py-2">
-            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Testimonials</h5>
-        </div>
-        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 70.8vw; height:20px;"></div>
-    </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.testimonials|richtext }} </p>
-    </div>
-
-    <div class="d-flex flex-row pt-2 mb-5">
+    <div class="d-flex flex-row pt-2 mb-3">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Statistics and Achievements</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 70.8vw; height:20px;"></div>
+                style="width: 68.7vw; height:20px;"></div>
     </div>
-    <div style="height: 12rem;">
-        <p class="text-center mx-auto my-5"> {{ page.statistics_and_achievements|richtext }} </p>
+    <div class=" text-center" style="height: 3rem;">
+        <p class="text-center mx-auto my-3"> {{ page.statistics_and_achievements_intro|richtext }} </p>
     </div>
 
     <!-- <div class="align-items-center pb-5" style="background-color: rgb(254, 208, 11);">
         <h3 class="py-5 mt-4">Statistics and Achievements</h3>
-        <p class="text-center m-auto"> {{ page.statistics_and_achievements|richtext }} </p>
+        <p class="text-center m-auto"> {{ page.statistics_and_achievements_intro|richtext }} </p>
 
     </div> -->
 
-    <div class="d-flex flex-row pt-2 mb-5">
+    <div class="d-flex flex-row pt-2 mb-3">
+        <div class="py-2">
+            <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Testimonials</h5>
+        </div>
+        <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
+                style="width: 76.8vw; height:20px;"></div>
+    </div>
+    <div class=" text-center" style="height: 3rem;">
+        <p class="text-center mx-auto my-3"> {{ page.testimonials_intro|richtext }} </p>
+    </div>
+
+    <div class="d-flex flex-row pt-2 mb-3">
         <div class="py-2">
             <h5 class="mx-auto" style="width: fit-content; color: rgb(254, 208, 11);">Community Feedback</h5>
         </div>
         <div class="p-2"><img src="{% static '/images/black-horizontal-thin-line.jpg'%}" alt=""
-                style="width: 70.8vw; height:20px;"></div>
+                style="width: 71.4vw; height:20px;"></div>
     </div>
-    <div style="height: 6rem;">
-        <p class="text-center mx-auto my-5"> {{ page.community_feedback|richtext }} </p>
+    <div class=" text-center" style="height: 3rem;">
+        <h5 class="text-center mx-auto my-3"> {{ page.community_feedback|richtext }} </h5>
     </div>
+
+    
 
 
     <!-- <div class="align-items-center pb-2">
@@ -78,8 +79,8 @@
                 <input type="submit" class="btn w-20" style="background-color: rgb(254, 208, 11);" />
             </form>
         </div>
+    </div>
 </div>
-
 <!-- {% for item in page.staff_details.all %}
 <div class="row row-cols-1 row-cols-md-2 g-4 container m-auto">
     <div class="col">
